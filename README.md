@@ -1,5 +1,5 @@
 # hotels
-Exploring Java concepts like
+A project exploring concepts like
 <ul>
   <li>Java 13</li>
   <li>Spring 5</li>
