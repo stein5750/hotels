@@ -2,14 +2,12 @@ package no.ctrlc.hotels;
 
 import java.util.UUID;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 
 
 @Component

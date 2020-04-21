@@ -3,44 +3,52 @@
 <html>
 <head>
 	<title>Hotels</title>
-	<style><%@include file="/WEB-INF/css/style.css"%></style>
+	<style>
+		<%@include file="/WEB-INF/css/style.css"%>
+	</style>
 </head>
 <body>
-		<table class="outer">
-			<tr>
-				<td
-					style="font-family: 'arial'; font-size: 16px; font-weight: bold;">Hotels</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>
-					<table class="border">
-						<tr class="tableheader">
-						  <th class="th">Hotel Id</th>
-							<th class="th">Hotel name</th>
-							<th class="th">Contact info</th>
-							<th class="th">Action</th>
+	<table class="center">
+		<tr>
+			<td class="heading1">
+				Hotels
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>
+				<table class="border">
+					<tr class="tableheader">
+					  <th class="th">Hotel Id</th>
+						<th class="th">Hotel name</th>
+						<th class="th">Action</th>
+					</tr>
+					<c:forEach items="${requestScope.hotels}" var="hotel">
+						<tr>
+							<td class="td"><c:out value="${hotel.id}" /></td>
+							<td class="td"><c:out value="${hotel.name}" /></td>
+							<td class="td">
+								<form name="hotelDetails" method="GET" action="${pageContext.request.contextPath}/servlet/mc/hotel">
+									<input type="hidden" name="customerId" value="${requestScope.customerId}" />
+									<input type="hidden" name="hotelId"    value="${hotel.id}" />
+									<input type="submit" value="Hotel details" />
+								</form>
+							</td>
 						</tr>
-						<c:forEach items="${list}" var="hotel">
-							<tr>
-								<td class="td"><c:out value="${hotel.id}" /></td>
-								<td class="td"><c:out value="${hotel.name}" /></td>
-								<td class="td">
-									<a href="${pageContext.request.contextPath}/servlet/mc/?action=hotelInfo&hotelId=${hotel.id}" 
-									style="color: green">Contact info</a>
-								</td>
-								<td class="td">	
-									<a href="${pageContext.request.contextPath}/servlet/mc/rooms?hotelId=${hotel.id}" 
-									style="color: green">Find available Rooms</a>
-								</td>
-							</tr>
-						</c:forEach>
-					</table>
-				</td>
-			</tr>
-		</table>
-
+					</c:forEach>
+				</table>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<div class="line">
+					<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+					<button type="button" name="back" onclick="history.back()">back</button>
+				</div>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>

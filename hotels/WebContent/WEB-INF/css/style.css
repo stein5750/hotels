@@ -6,11 +6,9 @@
 	border-collapse: collapse;
 }
 
-.outer {
+.center {
 	margin-left:auto; 
    	margin-right:auto;
-   /*	min-width:600px;*/
-   
 }
 
 .td,.th {
@@ -19,6 +17,12 @@
 	font-size: 12px;
 	padding: 7px;
 	
+}
+
+td.heading1 {
+	font-family: 'arial'; 
+	font-size: 16px; 
+	font-weight: bold;
 }
 
 .line {
@@ -40,7 +44,7 @@
 	float:right;
 	display: inline;
 	margin-left:5px;
-	width:110px;
+	width:280px;
 }
 
 .three-columns-left {
@@ -66,7 +70,9 @@
 
 }
 
-
+.error {
+	color: red;
+}
 
 
 label, input {
@@ -81,20 +87,9 @@ label, input {
 	background-color: #99CCFF;
 }
 
-.a {
+a {
 	font-family: 'arial';
 	font-size: 12px;
 }
-/*
- table {
-   margin-left:auto; 
-   margin-right:auto;
 
- }*/
- 
-/*
- input[type='datetime-local'] {
- 	width:70%;
- 	display:block;
- }
-*/
+

@@ -59,7 +59,7 @@ class OrderTest {
 	@ParameterizedTest
 	@NullSource
 	void testSetOrderUUID(UUID u) {
-		order.setOrderUUID(u);
+		order.setOrderId(u);
 		constraintViolations = validator.validate( order);
 		assertFalse( constraintViolations.isEmpty() );
 		assertEquals( "Order UUID cannot be null", constraintViolations.iterator().next().getMessage());
@@ -69,8 +69,8 @@ class OrderTest {
 	@Test
 	void testGetOrderUUID() {
 		UUID u=UUID.fromString("e5302e92-d16b-4a8d-91ff-317dcf25efa3");
-		order.setOrderUUID(u);
-		assertEquals(u, order.getOrderUUID());
+		order.setOrderId(u);
+		assertEquals(u, order.getOrderId());
 	}
 
 	@ParameterizedTest
@@ -326,24 +326,9 @@ class OrderTest {
 	}	
 
 
-	@Test
-	void testCalculatetotalPrice() {
-		int days= 1;
-		BigDecimal price= new BigDecimal(1000);
-		Room room = order.getReservedRoom();
-		room.setRoomPrice(price);
-		LocalDate fromDate = LocalDate.now();
-		LocalDate toDate   = LocalDate.now().plusDays(days);
-		order.setFromDate(fromDate);
-		order.setToDate(toDate);
-		order.CalculatetotalPrice();
-		assertEquals( price.multiply(new BigDecimal(days)), order.getTotalPrice());
-	}
-
-
 	private Order beforeEachCreateValidOrder() {
 		order=new Order();
-		order.setOrderUUID(UUID.fromString("7b575239-b6e9-4f23-929f-bf04f1378f2d"));
+		order.setOrderId(UUID.fromString("7b575239-b6e9-4f23-929f-bf04f1378f2d"));
 		order.setOrderCreatedDateTime(LocalDateTime.now());
 		order.setReservingCustomer(new Customer());
 		order.setReservedHotel(new Hotel());

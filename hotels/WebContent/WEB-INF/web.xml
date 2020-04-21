@@ -6,7 +6,7 @@
 	version="3.0">
 	
 	<welcome-file-list>
-    	<welcome-file>servlet/mc/homepage</welcome-file> <!-- http://localhost:8080/hotels/ open eclipse web here -->
+    	<welcome-file>servlet/mc/home</welcome-file> <!-- http://localhost:8080/servlet/home open eclipse web here -->
 	</welcome-file-list>
 	
 	<servlet>
@@ -21,6 +21,6 @@
 
 	<servlet-mapping>
 		<servlet-name>aservlet</servlet-name>
-		<url-pattern>/servlet/*</url-pattern><!-- no /path/ , using empty path / -->
+		<url-pattern>/servlet/*</url-pattern>
 	</servlet-mapping>	
 </web-app>

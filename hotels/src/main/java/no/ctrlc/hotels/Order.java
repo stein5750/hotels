@@ -1,9 +1,11 @@
 package no.ctrlc.hotels;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Digits;
@@ -12,15 +14,16 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
 public class Order {
+	
+	@Autowired
+	Tools tools;
 		
 	@NotNull(message="Order UUID cannot be null")
-	private UUID orderUUID;
+	private UUID orderId;
 	
 	@NotNull(message="OrderCreatedDateTime cannot be null")
 	private LocalDateTime orderCreatedDateTime;
@@ -50,9 +53,9 @@ public class Order {
 
 	public Order() {}
 	
-	public void setOrderUUID (UUID orderUUID) {this.orderUUID=orderUUID;}
+	public void setOrderId (UUID orderUUID) {this.orderId=orderUUID;}
 
-	public UUID getOrderUUID() {return orderUUID;}
+	public UUID getOrderId() {return orderId;}
 	
 	public void setOrderCreatedDateTime(LocalDateTime orderCreatedDateTime) {this.orderCreatedDateTime=orderCreatedDateTime;}
 
@@ -84,27 +87,30 @@ public class Order {
 	
 	public LocalDate getToDate() {return toDate;}
 	
-	public void setTotalPrice(BigDecimal totalPrice) {this.totalPrice=totalPrice;}
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	
 	public BigDecimal getTotalPrice() {return totalPrice;}
 	
 	@AssertTrue(message="FromDate must be before ToDate")
-	boolean fromDateIsBeforeToDate() {
-		if (fromDate == null || toDate==null ) return false;
-		return  fromDate.compareTo(toDate) < 0 ? true : false;
+	public	boolean fromDateIsBeforeToDate() {
+		try { return ascendingDates(fromDate, toDate); }
+		catch (IllegalArgumentException e) { return false;}	
 	}
 	
 	
-	public void CalculatetotalPrice() {
-		if ( fromDateIsBeforeToDate() == false || reservedRoom == null) return;
-		long days = ChronoUnit.DAYS.between(fromDate, toDate);
-		totalPrice = reservedRoom.getRoomPrice().multiply(new BigDecimal(days));
+	//--TODO write tests
+	private boolean ascendingDates(LocalDate fromDate, LocalDate toDate) {
+		if (fromDate == null || toDate==null ) throw new IllegalArgumentException("Arguments can not be null");
+		return  fromDate.isBefore(toDate);
 	}
 	
 	
 	public String toString() {
 		return "Order:\n"+
-				"order id="+orderUUID+"\n"+
+				"order id="+orderId+"\n"+
 				"order created="+orderCreatedDateTime.toString()+"\n"+
 				"customer:\n"+
 				reservingCustomer.toString()+"\n"+
