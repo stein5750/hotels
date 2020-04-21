@@ -1,9 +1,4 @@
 /* tabell generic jdbc + mariadb-java-client-2.5.3.jar*/
-/* Fordi OrderingSystem ikke er satt som root i mariadb opprettes databasen OrderingSystem manuelt*/
-
-# Dropper eventuelle tabeller
-# bookingsystem.* er strengt tatt ikke nødvendig, men gjør det tydeligere.
-
 
 DROP TABLE IF EXISTS bookingsystem.orders; -- orders must be dropped before customers and hotels because of foreign key
 DROP TABLE IF EXISTS bookingsystem.customers;
@@ -110,5 +105,3 @@ INSERT INTO bookingsystem.orders (orderuuid, ordercreateddatetime, customeruuid,
 INSERT INTO bookingsystem.orders (orderuuid, ordercreateddatetime, customeruuid, hotelid, roomnumber, fromdate, todate, totalprice) VALUES ("86ecad49-6000-47d2-bcbe-ba36e3eda383", "2019-06-01 04:45:45.257549", "13fcd783-a688-4c08-8f78-1f5ef2ee0c74", 3, 302, "2019-06-01", "2019-06-11", 13000);
 INSERT INTO bookingsystem.orders (orderuuid, ordercreateddatetime, customeruuid, hotelid, roomnumber, fromdate, todate, totalprice) VALUES ("86ecad49-6000-47d2-bcbe-ba36e3eda384", "2020-01-08 04:45:45.257549", "13fcd783-a688-4c08-8f78-1f5ef2ee0c74", 3, 302, "2020-05-01", "2020-05-11", 13000);
 INSERT INTO bookingsystem.orders (orderuuid, ordercreateddatetime, customeruuid, hotelid, roomnumber, fromdate, todate, totalprice) VALUES ("86ecad49-6000-47d2-bcbe-ba36e3eda385", "2020-01-01 04:45:45.257549", "13fcd783-a688-4c08-8f78-1f5ef2ee0c74", 3, 302, "2020-12-01", "2020-12-24", 29900);
-
-
