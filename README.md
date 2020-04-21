@@ -1,6 +1,6 @@
 # hotels
 Just a simple project while reading up on various topics.<br />
-Consequently the code will be subject to major changes in code and design,<br />
+Consequently the project will be subject to major changes in code and design,<br />
 and <b>may break, be or become incomplete at any time</b>.<br />
 <ul>
   <li>Java 13</li>
