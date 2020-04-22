@@ -9,9 +9,9 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +29,14 @@ public class MappingController {
 	@Autowired
 	Booking booking;
 
+	   @ExceptionHandler
+	   public ModelAndView handleException(Exception e) {
+		   Map<String, String> modelData = new HashMap<String, String>();
+		   modelData.put("errorMsg", e.getMessage());
+	      return new ModelAndView ("defaultErrorPage", modelData);
+	   }
+	
+	
 	   @RequestMapping(value = "/home", method = RequestMethod.GET)
 	   public String redirect() {
 	      return "redirect:/servlet/mc/findCustomer";
@@ -40,8 +48,8 @@ public class MappingController {
 				path="/findCustomer", 
 				method = RequestMethod.GET
 		)
-		public ModelAndView findCustomer() {
-			return new ModelAndView("findCustomer");
+		public String findCustomer() {
+			return "findCustomer";
 		}		
 		
 		
