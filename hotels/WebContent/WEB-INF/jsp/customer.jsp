@@ -40,9 +40,9 @@
 		<tr align="center">
 			<td>
 				<div class="line">
-					<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/servlet/c/home'" type="button">Home</button>
 					<button type="button" name="back" onclick="history.back()">back</button>
-					<form style="display: inline-block;" name="newOrderButton" method="GET" action="${pageContext.request.contextPath}/servlet/mc/hotels">
+					<form style="display: inline-block;" name="newOrderButton" method="GET" action="${pageContext.request.contextPath}/servlet/c/hotels">
 							<input type="hidden" name="customerId" value="${customer.id}" />						
 							<input type="submit" value="Select customer" />
 					</form>
@@ -90,7 +90,7 @@
 									<td class="td"><c:out value="${order.toDate}" /></td>
 									<td class="td"><c:out value="${order.totalPrice}" /></td>
 									<td class="td">
-										<form name="deleteButton" method="GET" action="${pageContext.request.contextPath}/servlet/mc/deleteOrder">
+										<form name="deleteButton" method="GET" action="${pageContext.request.contextPath}/servlet/c/deleteOrder">
 											<input type="hidden" name="customerId" value="${customer.id}" />
 											<input type="hidden" name="orderId" value="${order.orderId}" />
 											<input type="submit" value="Delete" />

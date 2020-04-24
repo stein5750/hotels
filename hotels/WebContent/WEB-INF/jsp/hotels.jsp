@@ -30,7 +30,7 @@
 							<td class="td"><c:out value="${hotel.id}" /></td>
 							<td class="td"><c:out value="${hotel.name}" /></td>
 							<td class="td">
-								<form name="hotelDetails" method="GET" action="${pageContext.request.contextPath}/servlet/mc/hotel">
+								<form name="hotelDetails" method="GET" action="${pageContext.request.contextPath}/servlet/c/hotel">
 									<input type="hidden" name="customerId" value="${requestScope.customerId}" />
 									<input type="hidden" name="hotelId"    value="${hotel.id}" />
 									<input type="submit" value="Hotel details" />
@@ -44,7 +44,7 @@
 		<tr align="center">
 			<td>
 				<div class="line">
-					<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/servlet/c/home'" type="button">Home</button>
 					<button type="button" name="back" onclick="history.back()">back</button>
 				</div>
 			</td>

@@ -28,7 +28,7 @@
 					</tr>
 					<tr>
 						<td class="td">
-							<form name="findByName" method="GET" action="${pageContext.request.contextPath}/servlet/mc/findCustomer">
+							<form name="findByName" method="GET" action="${pageContext.request.contextPath}/servlet/c/findCustomer">
 								<div class="line">
 									<label class="three-columns-left" for="customerId">Name</label>
 									<input class="three-columns-middle" 
@@ -47,7 +47,7 @@
 					
 					<tr>
 						<td class="td">
-							<form name="findByPhoneNumber" method="GET" action="${pageContext.request.contextPath}/servlet/mc/findCustomer">
+							<form name="findByPhoneNumber" method="GET" action="${pageContext.request.contextPath}/servlet/c/findCustomer">
 								<div class="line">
 									<label class="three-columns-left" for="customerId">Phone number</label>
 									<input class="three-columns-middle" type="tel" name="customerPhoneNumber" pattern="^(\+)?\d{3,15}$" title="An optional '+' sign and 3-15 digits" value="${requestScope.customerPhoneNumber}" />
@@ -59,7 +59,7 @@
 					
 					<tr>
 						<td class="td">
-							<form name="findByEmailAddress" method="GET" action="${pageContext.request.contextPath}/servlet/mc/findCustomer">
+							<form name="findByEmailAddress" method="GET" action="${pageContext.request.contextPath}/servlet/c/findCustomer">
 								<div class="line">
 									<label class="three-columns-left" for="customerId">e-mail address</label>
 									<input class="three-columns-middle" type="email" name="customerEmailAddress" type="text" value="${requestScope.customerEmailAddress}" />
@@ -73,7 +73,7 @@
 		</tr>
 		<tr align="center">
 			<td>
-				<form name="createCustomer" method="GET" action="${pageContext.request.contextPath}/servlet/mc/createCustomer">
+				<form name="createCustomer" method="GET" action="${pageContext.request.contextPath}/servlet/c/createCustomer">
 					<input type="submit" value="Create new customer" />
 				</form>
 			</td>
@@ -98,7 +98,7 @@
 					<td class="td"><c:out value="${customer.phoneNumber}" /></td>
 					<td class="td"><c:out value="${customer.emailAddress}" /></td>
 					<td class="td">
-						<form name="id" method="GET" action="${pageContext.request.contextPath}/servlet/mc/customer">
+						<form name="id" method="GET" action="${pageContext.request.contextPath}/servlet/c/customer">
 							<input type="hidden" name="customerId"   value="${customer.id}" />
 							<input type="submit" value="Select customer" />
 						</form>

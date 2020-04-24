@@ -104,9 +104,9 @@
 		<tr align="center">
 			<td>
 				<div class="line">
-					<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/servlet/c/home'" type="button">Home</button>
 					<button type="button" name="back" onclick="history.back()">back</button>
-					<form style="display: inline-block;" name="save" method="GET" action="${pageContext.request.contextPath}/servlet/mc/saveOrder">
+					<form style="display: inline-block;" name="save" method="GET" action="${pageContext.request.contextPath}/servlet/c/saveOrder">
 						<input type="hidden" name="hotelId" value="${requestScope.hotel.id}" />
 						<input type="hidden" name="fromDate" value="${requestScope.fromDate}" />
 						<input type="hidden" name="toDate" value="${requestScope.toDate}" />

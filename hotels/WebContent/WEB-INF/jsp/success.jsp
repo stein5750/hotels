@@ -33,7 +33,7 @@
 				</tr>
 				<tr align="center">
 					<td>
-						<form name="homeButton" method="GET" action="${pageContext.request.contextPath}/servlet/mc/home">
+						<form name="homeButton" method="GET" action="${pageContext.request.contextPath}/servlet/c/home">
 							<input type="submit" value="home" />
 						</form>
 					</td>

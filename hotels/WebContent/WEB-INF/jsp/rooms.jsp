@@ -10,7 +10,7 @@
 	</style>
 </head>
 <body>
-	<form name="dates" method="GET" action="${pageContext.request.contextPath}/servlet/mc/rooms">
+	<form name="dates" method="GET" action="${pageContext.request.contextPath}/servlet/c/rooms">
 		<table class="center">
 			<tr>
 				<td class="heading1">
@@ -57,7 +57,7 @@
 			<tr align="center">
 				<td>
 					<div class="line">
-						<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+						<button onclick="location.href='${pageContext.request.contextPath}/servlet/c/home'" type="button">Home</button>
 						<button type="button" name="back" onclick="history.back()">back</button>
 							<input type="hidden" name="hotelId" value="${requestScope.hotelId}" />
 							<input type="hidden" name="customerId" value="${requestScope.customerId}" />
@@ -85,7 +85,7 @@
 					<td class="td"><c:out value="${room.roomType}" /></td>
 					<td class="td"><c:out value="${room.roomPrice}" /></td>
 					<td class="td">
-						<form name="orderRoom" method="GET" action="${pageContext.request.contextPath}/servlet/mc/newOrder">
+						<form name="orderRoom" method="GET" action="${pageContext.request.contextPath}/servlet/c/newOrder">
 							<input type="hidden" name="customerId" value="${requestScope.customerId}" />
 							<input type="hidden" name="hotelId" value="${requestScope.hotelId}" />
 							<input type="hidden" name="fromDate" value="${requestScope.fromDate}" />

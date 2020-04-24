@@ -12,7 +12,7 @@
 		${requestScope.errorMsg}
 	</p>
 	<div class="line">
-		<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+		<button onclick="location.href='${pageContext.request.contextPath}/servlet/c/home'" type="button">Home</button>
 		<button type="button" name="back" onclick="history.back()">back</button>
 	</div>
 </body>

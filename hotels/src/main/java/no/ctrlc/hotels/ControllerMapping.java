@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-//--TODO Change design and use @ModelAttribute(name = "name")
 
-
-@Controller(value = "mappingController")
-@RequestMapping("/mc")
-public class MappingController {
+@Controller(value = "controllerMapping")
+@RequestMapping("/c")
+public class ControllerMapping {
 
 	@Autowired 
 	Tools tools;
@@ -39,11 +37,10 @@ public class MappingController {
 	
 	   @RequestMapping(value = "/home", method = RequestMethod.GET)
 	   public String redirect() {
-	      return "redirect:/servlet/mc/findCustomer";
+	      return "redirect:/servlet/c/findCustomer";
 	   }
 	
 
-		// /hotels/servlet/mc/rooms?action=availableRooms&hotelId=1&fromDate="2020-01-02"&todate="2020-01-03"
 		@RequestMapping( 
 				path="/findCustomer", 
 				method = RequestMethod.GET
@@ -53,7 +50,6 @@ public class MappingController {
 		}		
 		
 		
-		// /hotels/servlet/mc/findCustomer?hotelId=1&fromDate=2020-01-01&toDate=2020-02-01&roomNumber=201&name=Neil+Armstrong
 		@RequestMapping( 
 				path="/findCustomer", 
 				params = { "customerName"}, 
@@ -78,7 +74,6 @@ public class MappingController {
 		}			
 		
 		
-		// /hotels/servlet/mc/findCustomer?hotelId=1&fromDate=2020-01-01&toDate=2020-02-01&roomNumber=201&name=Neil+Armstrong
 		@RequestMapping( 
 				path="/findCustomer", 
 				params = { "customerPhoneNumber"}, 
@@ -98,7 +93,6 @@ public class MappingController {
 		}			
 		
 		
-		// /hotels/servlet/mc/findCustomer?hotelId=1&fromDate=2020-01-01&toDate=2020-02-01&roomNumber=201&customerEmailAddress=test@test.no
 		@RequestMapping( 
 				path="/findCustomer", 
 				params = { "customerEmailAddress"}, 
@@ -119,7 +113,6 @@ public class MappingController {
 		
 		
 		// Create customer
-		//
 		@RequestMapping( 
 				path="/createCustomer", 
 				method = RequestMethod.GET
@@ -131,8 +124,7 @@ public class MappingController {
 		}	
 		
 		
-		// Create customer
-		//
+		// Save customer
 		@RequestMapping( 
 				path="/saveNewCustomer", 
 				params = { "name", "phoneNumber", "address", "emailAddress"}, 
@@ -144,25 +136,23 @@ public class MappingController {
 				String address = params.get("address");
 				String emailAddress = params.get("emailAddress");
 				// Validate
-				boolean validData = true; //--TODO
+				boolean validData = true; //--TODO validate
 				if (validData) {
 					Customer c = booking.createCustomer(name, phoneNumber, emailAddress, address);
 					String customerId = c.getId().toString();
-					return "redirect:/servlet/mc/customer?customerId="+customerId;					
+					return "redirect:/servlet/c/customer?customerId="+customerId;					
 				}
 				else {
-					return "redirect:/servlet/mc/createCustomer"
+					return "redirect:/servlet/c/createCustomer"
 							+"?name="+name
 							+"&phoneNumber="+phoneNumber
 							+"&address="+address
 							+"&emailAddress="+emailAddress
 							;
 				}
-				
 		}
 		
 		
-		// /hotels/servlet/mc/findCustomer?hotelId=1&fromDate=2020-01-01&toDate=2020-02-01&roomNumber=201&customerEmailAddress=test@test.no
 		@RequestMapping( 
 				path="/customer", 
 				params = { "customerId"}, 
@@ -190,8 +180,8 @@ public class MappingController {
 			return new ModelAndView("customer", modelData);
 		}		
 	   
+		
 		// Delete order and redirect to /customer
-		// /hotels/servlet/mc/findCustomer?hotelId=1&fromDate=2020-01-01&toDate=2020-02-01&roomNumber=201&customerEmailAddress=test@test.no
 		@RequestMapping( 
 				path="/deleteOrder", 
 				params = { "customerId", "orderId"}, 
@@ -206,11 +196,10 @@ public class MappingController {
 				booking.deleteOrderByOrderId(UUID.fromString(orderId));			
 			}			
 			// Return Model and View
-			return "redirect:/servlet/mc/customer?customerId="+customerId;
+			return "redirect:/servlet/c/customer?customerId="+customerId;
 		}		
 		
 			
-	// /hotels/servlet/mc/hotels
 	@RequestMapping(path="/hotels", method=RequestMethod.GET)
 	public ModelAndView hotels( @RequestParam("customerId") String customerId) {
 		Map<String, Object> modelData = new HashMap<String, Object>();
@@ -220,7 +209,6 @@ public class MappingController {
 	}
 	
 	
-	// /hotels/servlet/mc/?action=hotelInfo&hotelId=1
 	@RequestMapping(
 		path="/hotel", 
 		params = { "customerId","hotelId"},
@@ -237,7 +225,6 @@ public class MappingController {
 	}
 	
 	
-	// /hotels/servlet/mc/?action=availableRooms&hotelId=1
 	@RequestMapping( 
 			path="/rooms",
 			params = {"customerId", "hotelId", "!fromdate", "!toDate"},
@@ -255,7 +242,6 @@ public class MappingController {
 	}	
 
 	
-	// /hotels/servlet/mc/rooms?action=availableRooms&hotelId=1&fromDate="2020-01-02"&todate="2020-01-03"
 	@RequestMapping( 
 			path="/rooms", 
 			params = { "customerId", "hotelId","fromDate","toDate"}, 
@@ -303,7 +289,6 @@ public class MappingController {
 	}	
 
 
-	// /hotels/servlet/mc/findCustomer?hotelId=1&fromDate=2020-01-01&toDate=2020-02-01&roomNumber=201&customerEmailAddress=test@test.no
 	@RequestMapping( 
 			path="/newOrder", 
 			params = { "customerId", "hotelId","fromDate","toDate", "roomNumber"}, 
@@ -334,7 +319,6 @@ public class MappingController {
 	}			
 	
 	
-	// 
 	@RequestMapping( 
 			path="/saveOrder", 
 			params = { "hotelId","fromDate","toDate", "roomNumber", "customerId", "totalPrice"}, 
@@ -353,11 +337,11 @@ public class MappingController {
 		UUID orderId = booking.createOrder(customerUUID, hotelId, roomNumber, from, to);
 		// if saved successfully
 		if ( orderId != null) {
-			 return "redirect:/servlet/mc/success?orderId="+orderId.toString();
+			 return "redirect:/servlet/c/success?orderId="+orderId.toString();
 		}
 		else {
 			String errorMsg = "An error occured while saving the order";
-			return  "redirect:/servlet/mc/newOrder?"
+			return  "redirect:/servlet/c/newOrder?"
 						+"&hotelId="+hotelId
 						+"&fromDate="+fromDate
 						+"&toDate="+toDate
@@ -367,7 +351,7 @@ public class MappingController {
 		}
 	}
 
-	// /hotels/servlet/mc/orderWasSaved?orderId=someid
+	
 	@RequestMapping(
 		path="/success", 
 		params="orderId",
@@ -385,6 +369,7 @@ public class MappingController {
 		catch(IllegalArgumentException e) {return false;}
 		return true;
 	}
+	
 	
 	/*
 	 * The regex matches:

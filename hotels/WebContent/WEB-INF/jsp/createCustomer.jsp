@@ -10,7 +10,7 @@
 	</style>
 </head>
 <body>
-	<form id="createCustomer" name="createCustomer" method="GET" action="${pageContext.request.contextPath}/servlet/mc/saveNewCustomer">
+	<form id="createCustomer" name="createCustomer" method="GET" action="${pageContext.request.contextPath}/servlet/c/saveNewCustomer">
 	<table class="center">
 		<tr>
 			<td class="heading1">
@@ -64,7 +64,7 @@
 		<tr align="center">
 			<td>
 				<div class="line">
-					<button onclick="location.href='${pageContext.request.contextPath}/servlet/mc/home'" type="button">Home</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/servlet/c/home'" type="button">Home</button>
 					<button type="button" name="back" onclick="history.back()">back</button>
 					<input type="submit" value="Create new customer" />
 				</div>
