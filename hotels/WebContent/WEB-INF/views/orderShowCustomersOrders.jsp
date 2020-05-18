@@ -26,7 +26,7 @@
 							<tr>
 								<td>
 						 			<p style="text-align:left">
-										<c:out value="There are no Previous orders by ${customer.name}." />
+										<c:out value="There are no Previous orders by ${order.customer.name}." />
 									</p>
 								</td>	
 								<td>
@@ -43,7 +43,7 @@
 							<tr>
 								<td>
 						 			<p style="text-align:left">
-										<c:out value="Previous orders by ${customer.name}." />
+										<c:out value="Previous orders by ${order.customer.name}." />
 									</p>
 								</td>
 								<td>
