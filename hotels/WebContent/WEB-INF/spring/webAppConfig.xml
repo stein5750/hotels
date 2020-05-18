@@ -3,22 +3,28 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-	 http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd ">
 
 	<mvc:annotation-driven />
 	
-	<context:component-scan base-package="no.ctrlc.hotels" />
-
+	<context:component-scan base-package="no.ctrlc.hotels" >
+		<context:exclude-filter type="regex" expression="no\.ctrlc\.hotels\.commandlineclient.*"/>
+	</context:component-scan>
+	
+ 	<!-- viewResolver -->	 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+		
+	<!-- resources som javascript og css --> 
+	<!-- TODO make calls to css and javascript use this instead -->
+	<mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>	
 	
-	 	<!-- database  -->	
- 	
+	 <!-- database  -->	 	
  	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
  		<property name="dataSource" ref="dataSource" />
  	</bean>
@@ -26,11 +32,11 @@
 	<bean id="namedParameterJdbcTemplate"
 		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg index="0" ref="dataSource" />
-	</bean>
-	
+	</bean>	
+
 	<context:property-placeholder location="classpath*:META-INF/database.properties" />
- 
- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+
+  	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
  		<property name="driverClassName" value="${database.driverClassName}" />
  		<property name="url" value="${database.url}" /> 		
  		<property name="username" value="${database.username}" /> 		
