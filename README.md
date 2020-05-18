@@ -1,7 +1,7 @@
 # hotels
-Just a simple project while reading up on various topics.<br />
+Just a project while reading up on various topics.<br />
 Consequently the project will be subject to major changes in code and design,<br />
-and <b>may break, be or become incomplete at any time</b>.<br />
+and <b>may break at any time</b>.<br />
 <br />
 <ul>
   <li>Java 13</li>
