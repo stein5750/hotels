@@ -24,64 +24,60 @@ import no.ctrlc.hotels.model.Order;
 @ControllerAdvice
 public class ControllerAdvices {
 
+    @Autowired
+    private ApplicationContext appContext;
 
-	@Autowired
-	private ApplicationContext appContext;
-	
-	// Exception handling
-   @ExceptionHandler
-   public ModelAndView handleException(Exception e) {
-	   Map<String, String> modelData = new HashMap<String, String>();
-	   modelData.put("error.exception",  e.toString());
-      return new ModelAndView ("errorPage", modelData);
-   }
-   
-   
-   // Set Date format for data binding as this must be set explicitly.
-   @InitBinder
-   public void configureInitiBinder(WebDataBinder webDataBinder) {
-	   webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor( new SimpleDateFormat("yyyy-MM-dd"), true, 10));
-   }
-   
-   
-	@ModelAttribute(name = "customer")
-	public Customer addCustomerObjectToModel() {	
-		Customer customer = (Customer) appContext.getBean("customer");
-		return customer;
-	}   
+    // Exception handling
+    @ExceptionHandler
+    public ModelAndView handleException( Exception e) {
+        Map<String, String> modelData = new HashMap<String, String>();
+        modelData.put("error.exception", e.toString());
+        return new ModelAndView("errorPage", modelData);
+    }
 
-	
-	@InitBinder( value = "customer")
-	public void initBinder_Customer(WebDataBinder webDataBinder) {
-		// Security, disable the possibility to change customer id.
-		webDataBinder.setDisallowedFields("id");
-	}	
-   
-   
-	@ModelAttribute(name = "order")
-	public Order addOrderObjectToModel() {	
-		Order order = (Order) appContext.getBean("order");
-		return order;
-	}	
+    // Set Date format for data binding as this must be set explicitly.
+    @InitBinder
+    public void configureInitiBinder( WebDataBinder webDataBinder) {
+        webDataBinder.registerCustomEditor(Date.class,
+                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+    }
 
-	@InitBinder( value = "order")
-	public void initBinder_Order(WebDataBinder webDataBinder) {
-		// Security, disable the possibility to change order id, customer id and total price.
-		webDataBinder.setDisallowedFields("orderId");
-		webDataBinder.setDisallowedFields("customerId");
-		webDataBinder.setDisallowedFields("totalPrice");
-	}
+    @ModelAttribute(name = "customer")
+    public Customer addCustomerObjectToModel() {
+        Customer customer = (Customer) appContext.getBean("customer");
+        return customer;
+    }
 
-	   
-	@ModelAttribute(name = "hotel")
-	public Hotel addHotelObjectToModel() {	
-		Hotel hotel = (Hotel) appContext.getBean("hotel");
-		return hotel;
-	}	
-	
-	@ModelAttribute(name = "dates")
-	public Dates addDatesObjectToModel() {	
-		return (Dates) appContext.getBean("dates");
-	}
-	
+    @InitBinder(value = "customer")
+    public void initBinder_Customer( WebDataBinder webDataBinder) {
+        // Security, disable the possibility to change customer id.
+        webDataBinder.setDisallowedFields("id");
+    }
+
+    @ModelAttribute(name = "order")
+    public Order addOrderObjectToModel() {
+        Order order = (Order) appContext.getBean("order");
+        return order;
+    }
+
+    @InitBinder(value = "order")
+    public void initBinder_Order( WebDataBinder webDataBinder) {
+        // Security, disable the possibility to change order id, customer id and total
+        // price.
+        webDataBinder.setDisallowedFields("orderId");
+        webDataBinder.setDisallowedFields("customerId");
+        webDataBinder.setDisallowedFields("totalPrice");
+    }
+
+    @ModelAttribute(name = "hotel")
+    public Hotel addHotelObjectToModel() {
+        Hotel hotel = (Hotel) appContext.getBean("hotel");
+        return hotel;
+    }
+
+    @ModelAttribute(name = "dates")
+    public Dates addDatesObjectToModel() {
+        return (Dates) appContext.getBean("dates");
+    }
+
 }
